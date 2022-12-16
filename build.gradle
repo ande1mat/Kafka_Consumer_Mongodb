@@ -1,5 +1,6 @@
 plugins {
-    id 'org.springframework.boot' version '2.4.5'
+    //id 'org.springframework.boot' version '2.4.5'
+    id 'org.springframework.boot' version '2.6.0'
     id 'java'
 }
 
@@ -16,14 +17,14 @@ repositories {
 }
 
 dependencies {
-    implementation platform('org.springframework.boot:spring-boot-dependencies:2.4.5')
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version:'2.4.5'
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version:'2.4.5'
+    implementation platform('org.springframework.boot:spring-boot-dependencies:2.6.0')
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version:'2.6.0'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version:'2.6.0'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter'
 
     //Kafka
-    implementation group: 'org.springframework.kafka', name: 'spring-kafka', version: '2.4.5.RELEASE'
+    implementation group: 'org.springframework.kafka', name: 'spring-kafka', version: '2.6.0'
 
     //Testing
     testImplementation('org.springframework.boot:spring-boot-starter-test') {

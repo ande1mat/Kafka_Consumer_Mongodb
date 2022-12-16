@@ -12,12 +12,12 @@ import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.*;
 import org.springframework.kafka.listener.ContainerProperties;
-import org.springframework.kafka.listener.LoggingErrorHandler;
-import org.springframework.kafka.listener.SeekToCurrentErrorHandler;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 import org.springframework.kafka.support.serializer.JsonSerializer;
+
 import java.util.HashMap;
 import java.util.Map;
+
 
 /* Running Local Host Kafka
 Start zookeeper: bin/zookeeper-server-start.sh config/zookeeper.properties
@@ -53,14 +53,11 @@ public class KafkaConfig {
     @Bean
     public ConcurrentKafkaListenerContainerFactory<String, ItemMessage> kafkaListener(){
         ConcurrentKafkaListenerContainerFactory factory = new ConcurrentKafkaListenerContainerFactory();
-
         factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL_IMMEDIATE);
-        //factory.setErrorHandler(new SeekToCurrentErrorHandler());
-
         factory.setConsumerFactory(consumerFactory());
+        factory.setCommonErrorHandler(new KafkaErrorHandler());  //Handle bad messages in topic
+
         return factory;
     }
-
-    //@Bean public LoggingErrorHandler errorHandler() { return new LoggingErrorHandler(); }
 
 }

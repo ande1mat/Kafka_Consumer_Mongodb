@@ -19,13 +19,26 @@ public class TopicListener {
     )
     public void listen(ItemMessage item, Acknowledgment acknowledgment){
 
-        System.out.println("Consumed Message :"+item);
+        //System.out.println("Consumed Message :"+item);
 
-        System.out.println(item.getItem_id());
-        System.out.println(item.getBarcode());
-        System.out.println(item.getType());
-        System.out.println(item.getCountry());
-        System.out.println(item.getDescription());
+        //String json = item.toString();
+        try {
+            System.out.println("Consumed Message :"+item);
+            //Call my service calss to start doing stuff
+            // Simulating an error case
+            // throw new RuntimeException();
+        } catch (Exception e) {
+            System.out.println("Message consumption failed for message {}"+item);
+            //String originalTopic = consumerRecord.topic();
+            //ProducerRecord<String, String> record = new ProducerRecord<>(DLQ_TOPIC, json);
+            //record.headers().add(ORIGINAL_TOPIC_HEADER_KEY, originalTopic.getBytes(UTF_8));
+            //kafkaTemplate.send(record);
+        } finally {
+            acknowledgment.acknowledge();
+        }
+
+
+        //consumer.commitSync();
 
         /*if (isEmptyMessage(item)) {
             System.out.println("Empty message received from kafka.");
@@ -34,7 +47,7 @@ public class TopicListener {
         }*/
 
         //Commit the Offset and read the next kafka event
-        acknowledgment.acknowledge();
+        //acknowledgment.acknowledge();
 
         //Need to add error handling, need to set backoff strategy to limit retries
         //Need to commit the offset to move to the next record
