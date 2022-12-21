@@ -23,6 +23,9 @@ dependencies {
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter'
 
+    //MongoDB
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+
     //Kafka
     implementation group: 'org.springframework.kafka', name: 'spring-kafka', version: '2.6.0'
 
