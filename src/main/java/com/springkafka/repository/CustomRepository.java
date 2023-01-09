@@ -8,7 +8,6 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
 @Repository
@@ -27,6 +26,7 @@ public class CustomRepository {
     }
 
     /*{"item_id":1, "barcode":"A123456789", "type":"testing", "description":"The Arrival of a Test","country":"TEST"}*/
+    //This method will perform a Upsert (findAndModify), so it will insert if item_id is new, and update if it exists
     public Item update(Item item){
         Query query = new Query();
         query.addCriteria(Criteria.where("item_id").is(item.getItem_id()));
@@ -38,17 +38,18 @@ public class CustomRepository {
         return mongoTemplate.findAndModify(query, update, FindAndModifyOptions.options().upsert(true), Item.class);  //do the UPSERT True here
     }
     
-
+    //Future could be used for a find operation
     /*public List findByItem_id(Long Item_id){
         Query query = new Query();
-        query.addCriteria(Criteria.where("name").is(Item_id));
+        query.addCriteria(Criteria.where("item_id").is(Item_id));
         return mongoTemplate.find(query, Item.class);
     }
 
+    //Future could be used for a delete operation
     public void deleteById(String deptId) {
         Query query = new Query();
-        query.addCriteria(Criteria.where("id").is(deptId));
-        mongoTemplate.remove(query, Department.class);
+        query.addCriteria(Criteria.where("item_id").is(Item_id));
+        mongoTemplate.remove(query, Item.class);
     }*/
 
 }

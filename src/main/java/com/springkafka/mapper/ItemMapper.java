@@ -15,7 +15,7 @@ public class ItemMapper {
         itemMessage.setDescription(item.getDescription());
         itemMessage.setCountry(item.getCountry());
 
-        System.out.println(itemMessage.toString());
+        //System.out.println(itemMessage.toString());
         return itemMessage;
     }
 
@@ -30,7 +30,7 @@ public class ItemMapper {
         itemModel.setDescription(itemMessage.getDescription());
         itemModel.setCountry(itemMessage.getCountry());
 
-        System.out.println(itemModel.toString());
+        //System.out.println(itemModel.toString());
         return itemModel;
     }
 

@@ -31,12 +31,12 @@ public class TopicListener {
 
         try {
             System.out.println("Consumed Message :"+item);
-            //ItemMapper.itemtoItemMessage(item);  //Map the ItemMessage
-            service.saveItem(ItemMapper.itemtoItemMessage(item));  //Call the Service to Map objects and insert to MongoDB
+            //Map the ItemMessage to Domain object and Save to MongoDB
+            service.saveItem(ItemMapper.itemtoItemMessage(item));
             System.out.println ("Saved the Item to MongoDB");
         } catch (Exception e) {
             System.out.println("Message consumption failed for message {}"+item);
-            //Do something
+            //Do something else
         } finally {
             acknowledgment.acknowledge();
         }

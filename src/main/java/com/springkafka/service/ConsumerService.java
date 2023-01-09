@@ -12,12 +12,11 @@ import org.springframework.stereotype.Component;
 public class ConsumerService {
     @Autowired
     private ItemRepository itemRepository;
-
     private CustomRepository customRepository;
 
-
-    public ConsumerService(ItemRepository itemRepository) {
+    public ConsumerService(ItemRepository itemRepository, CustomRepository customRepository) {
         this.itemRepository = itemRepository;
+        this.customRepository = customRepository;
     }
 
     public ItemMessage saveItem (ItemMessage itemMessage) {
@@ -25,11 +24,10 @@ public class ConsumerService {
         //Should be able to move this above...
         Item itemModel = new Item();
 
-        //Call the Mapper Item Model Mapper
+        //Map the Item Message Domain object to the Item Model Object
         itemModel = ItemMapper.itemMessagetoItemModel(itemMessage);
 
-        //Save to MongodDB
-        //itemRepository.save(itemModel);
+        //Save the Item Model object to MongodDB
         customRepository.update(itemModel);
 
         return itemMessage;
