@@ -37,9 +37,9 @@ These steps enable you to run the app locally within your IDE.
 
 ## Future ToDos
     * Add Unit Tests for Item Events
-    * Add a Inventory Topic to listen to for Item Inventory events and update a new MongoDB document for Item Inventory
-    * Add Unit Tests for Inventory Events
-    * Do something interesting with the Item or Inventory event message and learn about (java arrayslist, hashmap, trees, graphs, etc.). E.g. I could perform rounding up or down on the Qty of pounds.  Put all that data into a Array/List and then loop through and update my Domain/Model data before Insert into DB.  I could add a UOM attribute on the Item detail, and if in Pounds only then do the rounding on the Kafka data before I insert into the DB.
+    * Add a Inventory Event Type to the Kafka message and consume both Item and Inventory event messages.  Insert/update a new MongoDB document for Item Inventory
+    * Add Unit Tests for Item Inventory Events
+    * Do something interesting with the Item Inventory event message and learn about (java arrayslist, hashmap, trees, graphs, etc.). E.g. I could perform rounding up or down on the Qty of pounds.  Put all that data into a Array/List and then loop through and update my Domain/Model data before Insert into DB.  I could add a UOM attribute on the Item detail, and if in Pounds only then do the rounding on the Kafka data before I insert into the DB.
     * Do something with Abstraction + Inheritance, promoting code reuse of the abstracted classes
     
    
