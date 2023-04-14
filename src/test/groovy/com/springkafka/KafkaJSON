@@ -1,5 +1,0 @@
-{"item_id":1, "barcode":"A123456789", "type":"movie", "description":"The Arrival of a Train", "country":"USA"}
-{"item_id":2, "barcode":"A123456123", "type":"matchbox car", "description":"red corvette", "country":"USA"}
-{"item_id":3, "barcode":"A123456456", "type":"movie", "description":"The Great Escape", "country":"England"}
-{"item_id":4, "barcode":"A123450000", "type":"toy animal", "description":"Big Elephant", "country":"Italy"}
-{"item_id":5, "barcode":"A123450010", "type":"movie", "description":"The Departure of a Train", "country":"USA"}

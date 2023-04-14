@@ -28,7 +28,6 @@ public class TopicListener {
             containerFactory = "kafkaListener"
     )
     public void listen(ItemMessage item, Acknowledgment acknowledgment){
-
         try {
             System.out.println("Consumed Message :"+item);
             //Map the ItemMessage to Domain object and Save to MongoDB
@@ -40,6 +39,5 @@ public class TopicListener {
         } finally {
             acknowledgment.acknowledge();
         }
-
     }
 }

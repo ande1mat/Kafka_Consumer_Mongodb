@@ -30,12 +30,13 @@ dependencies {
     implementation group: 'org.springframework.kafka', name: 'spring-kafka', version: '2.6.0'
 
     //Testing
-    testImplementation 'org.spockframework:spock-core:2.0-groovy-3.0'
-    testImplementation 'org.codehaus.groovy:groovy-all:3.0.8'
-
-    //testImplementation('org.springframework.boot:spring-boot-starter-test') {
-    //    exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-    //}
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation 'org.springframework.kafka:spring-kafka-test'
+    testImplementation group: 'junit', name: 'junit', version: '4.13.2'
+    testImplementation 'org.testcontainers:kafka:1.17.2'
+    testImplementation 'org.spockframework:spock-core:2.1-groovy-3.0'
+    testImplementation group: 'org.spockframework', name: 'spock-spring', version: '2.1-groovy-3.0'
+    //testImplementation 'com.github.tomakehurst:wiremock:2.27.2'
 }
 
 test {

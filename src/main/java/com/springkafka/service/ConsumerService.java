@@ -1,6 +1,7 @@
 package com.springkafka.service;
 
 import com.springkafka.domain.ItemMessage;
+import com.springkafka.domain.LocationInventory;
 import com.springkafka.mapper.ItemMapper;
 import com.springkafka.model.Item;
 import com.springkafka.repository.CustomRepository;
