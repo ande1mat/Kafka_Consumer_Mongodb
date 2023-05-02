@@ -3,6 +3,7 @@ package com.springkafka.service;
 import com.springkafka.domain.ItemMessage;
 import com.springkafka.domain.LocationInventory;
 import com.springkafka.mapper.ItemMapper;
+import com.springkafka.model.Inventory;
 import com.springkafka.model.Item;
 import com.springkafka.repository.CustomRepository;
 import com.springkafka.repository.ItemRepository;
@@ -20,18 +21,24 @@ public class ConsumerService {
         this.customRepository = customRepository;
     }
 
-    public ItemMessage saveItem (ItemMessage itemMessage) {
-
+    public void saveItem () {
+        //public ItemMessage saveItem (ItemMessage itemMessage) {
         //Should be able to move this above...
         Item itemModel = new Item();
+        Inventory inventoryModel = new Inventory();
 
         //Map the Item Message Domain object to the Item Model Object
-        itemModel = ItemMapper.itemMessagetoItemModel(itemMessage);
+        itemModel = ItemMapper.itemMessagetoItemModel();
 
         //Save the Item Model object to MongodDB
-        customRepository.update(itemModel);
+        customRepository.updateItem(itemModel);
 
-        return itemMessage;
+        //Map the Inventory Message Domain object to the Item Model Object
+        inventoryModel = ItemMapper.itemMessagetoInventoryModel();
+
+        customRepository.updateInventory(inventoryModel);
+
+        //return();
     }
 
 }

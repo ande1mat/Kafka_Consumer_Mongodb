@@ -31,7 +31,9 @@ public class TopicListener {
         try {
             System.out.println("Consumed Message :"+item);
             //Map the ItemMessage to Domain object and Save to MongoDB
-            service.saveItem(ItemMapper.itemtoItemMessage(item));
+            ItemMapper.itemtoItemMessage(item);
+            service.saveItem();
+            //service.saveItem(ItemMapper.itemtoItemMessage(item));
             System.out.println ("Saved the Item to MongoDB");
         } catch (Exception e) {
             System.out.println("Message consumption failed for message {}"+item);

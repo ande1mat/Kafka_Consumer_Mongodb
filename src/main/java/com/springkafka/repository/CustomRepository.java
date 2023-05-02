@@ -1,5 +1,6 @@
 package com.springkafka.repository;
 
+import com.springkafka.model.Inventory;
 import com.springkafka.model.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
@@ -27,7 +28,7 @@ public class CustomRepository {
 
     /*{"item_id":1, "barcode":"A123456789", "type":"testing", "description":"The Arrival of a Test","country":"TEST"}*/
     //This method will perform a Upsert (findAndModify), so it will insert if item_id is new, and update if it exists
-    public Item update(Item item){
+    public Item updateItem(Item item){
         Query query = new Query();
         query.addCriteria(Criteria.where("item_id").is(item.getItem_id()));
         Update update = new Update();
@@ -37,7 +38,24 @@ public class CustomRepository {
         update.set("country", item.getCountry());
         return mongoTemplate.findAndModify(query, update, FindAndModifyOptions.options().upsert(true), Item.class);  //do the UPSERT True here
     }
-    
+
+    /*Sample JSON Message for Terminal window producer NEW
+    {"item_id":1,"barcode":"A123456789","type":"movie","description":"The Arrival of a Train","country":"USA","location":
+    [{"store":"100","inventory":"25","datetime":"2023-04-14T18:56:30Z"},{"store":"200","inventory":"99","datetime":"2023-04-14T18:56:30Z"},
+    {"store":"300","inventory":"250","datetime":"2023-04-14T18:56:30Z"}]}*/
+
+    //This method will perform a Upsert (findAndModify), so it will insert if item_id is new, and update if it exists
+    public Inventory updateInventory(Inventory inventory){
+        Query query = new Query();
+        query.addCriteria(Criteria.where("item_id").is(inventory.getItem_id()));
+        Update update = new Update();
+        update.set("item_id", inventory.getItem_id());
+        update.set("store", inventory.getStore());
+        update.set("inventory", inventory.getInventory());
+        update.set("datetime", inventory.getDatetime());
+        return mongoTemplate.findAndModify(query, update, FindAndModifyOptions.options().upsert(true), Inventory.class);  //do the UPSERT True here
+    }
+
     //Future could be used for a find operation
     /*public List findByItem_id(Long Item_id){
         Query query = new Query();
