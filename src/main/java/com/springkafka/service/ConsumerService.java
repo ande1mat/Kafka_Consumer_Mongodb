@@ -21,22 +21,21 @@ public class ConsumerService {
         this.customRepository = customRepository;
     }
 
-    public void saveItem () {
-        //public ItemMessage saveItem (ItemMessage itemMessage) {
-        //Should be able to move this above...
+    public void saveItem (ItemMessage itemMessage) {
+
         Item itemModel = new Item();
         Inventory inventoryModel = new Inventory();
 
         //Map the Item Message Domain object to the Item Model Object
-        itemModel = ItemMapper.itemMessagetoItemModel();
+        itemModel = ItemMapper.itemMessagetoItemModel(itemMessage);
 
         //Save the Item Model object to MongodDB
         customRepository.updateItem(itemModel);
 
         //Map the Inventory Message Domain object to the Item Model Object
-        inventoryModel = ItemMapper.itemMessagetoInventoryModel();
+        //inventoryModel = ItemMapper.itemMessagetoInventoryModel();
 
-        customRepository.updateInventory(inventoryModel);
+        //customRepository.updateInventory(inventoryModel);
 
         //return();
     }

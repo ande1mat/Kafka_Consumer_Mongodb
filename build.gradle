@@ -22,6 +22,8 @@ dependencies {
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version:'2.6.0'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter'
+    //implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+    //implementation 'com.fasterxml.jackson.datatype.jsr310.JavaTimeModule'
 
     //MongoDB
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
@@ -36,7 +38,6 @@ dependencies {
     testImplementation 'org.testcontainers:kafka:1.17.2'
     testImplementation 'org.spockframework:spock-core:2.1-groovy-3.0'
     testImplementation group: 'org.spockframework', name: 'spock-spring', version: '2.1-groovy-3.0'
-    //testImplementation 'com.github.tomakehurst:wiremock:2.27.2'
 }
 
 test {

@@ -31,12 +31,13 @@ public class TopicListener {
         try {
             System.out.println("Consumed Message :"+item);
             //Map the ItemMessage to Domain object and Save to MongoDB
-            ItemMapper.itemtoItemMessage(item);
-            service.saveItem();
-            //service.saveItem(ItemMapper.itemtoItemMessage(item));
+            //ItemMapper.itemtoItemMessage(item);
+            //service.saveItem();
+            service.saveItem(ItemMapper.itemtoItemMessage(item));  //This mapper method returns the itemMessage object to SAVE to MONGODB
             System.out.println ("Saved the Item to MongoDB");
         } catch (Exception e) {
             System.out.println("Message consumption failed for message {}"+item);
+            System.out.println(e);
             //Do something else
         } finally {
             acknowledgment.acknowledge();

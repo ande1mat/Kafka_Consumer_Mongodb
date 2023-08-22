@@ -1,8 +1,14 @@
 package com.springkafka.domain;
 
+
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.Objects;
+
+
+//"location_inventory":[{"store":"100","inventory":"25","datetime":"2023-04-14T18:56:30Z"},{"store":"200","inventory":"99","datetime":"2023-04-14T18:56:30Z"},{"store":"300","inventory":"250","datetime":"2023-04-14T18:56:30Z"}]}
 
 public class LocationInventory {
 
@@ -10,32 +16,31 @@ public class LocationInventory {
     private String store;
 
     @JsonProperty("inventory")
-    private String inventory;
+    private Integer inventory;
 
     @JsonProperty("datetime")
-    private OffsetDateTime datetime;
+    private LocalDateTime datetime;
+    //private OffsetDateTime datetime;
 
-    public String getStore() {
-        return store;
-    }
+    public String getStore() {return store;}
 
     public void setStore(String store) {
         this.store = store;
     }
 
-    public String getInventory() {
+    public Integer getInventory() {
         return inventory;
     }
 
-    public void setInventory(String inventory) {
+    public void setInventory(Integer inventory) {
         this.inventory = inventory;
     }
 
-    public OffsetDateTime getDatetime() {
+    public LocalDateTime getDatetime() {
         return datetime;
     }
 
-    public void setDatetime(OffsetDateTime datetime) {
+    public void setDatetime(LocalDateTime datetime) {
         this.datetime = datetime;
     }
 
@@ -56,7 +61,7 @@ public class LocationInventory {
     public String toString() {
         return "LocationInventory{" +
                 "store='" + store + '\'' +
-                ", inventory='" + inventory + '\'' +
+                ", inventory=" + inventory +
                 ", datetime=" + datetime +
                 '}';
     }

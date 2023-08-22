@@ -1,14 +1,24 @@
 package com.springkafka.mapper;
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.springkafka.domain.ItemMessage;
 import com.springkafka.domain.LocationInventory;
 import com.springkafka.model.Inventory;
 import com.springkafka.model.Item;
+import org.springframework.context.annotation.Bean;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class ItemMapper {
 
     //Map the consumed Kafka message to Domain Objects
-    public static ItemMessage  itemtoItemMessage(ItemMessage item) {
+    public static ItemMessage  itemtoItemMessage(ItemMessage item) throws IOException {
 
         ItemMessage itemMessage = new ItemMessage();
         LocationInventory locationInventory = new LocationInventory();
@@ -22,28 +32,37 @@ public class ItemMapper {
         itemMessage.setVendor(item.getVendor());
         itemMessage.setCountry(item.getCountry());
 
+        //Map Location Inventory properties to Domain object
+        itemMessage.setLocation(item.getLocation());  //THIS WORKS AND ITEM MESSAGE LOCATION LIST IS POPULATED AND MAPPED
+        System.out.println(itemMessage.getLocation()); //LOCATION INFO JSON ARRAY IS POPULATED HERE!!
+        //locationInventory.setStore(itemMessage.getLocation());
 
-        itemMessage.setLocation(item.getLocation());
 
-        System.out.println(itemMessage.toString());
+        /*lets create a List of the location info to manage later
 
-        //If this is populated already from 2 lines above, then i'm golden and i can
-        //just do the mapping below, then on Save make a second call to update a new Inventory Collection in MongDB!!
-        System.out.println(locationInventory.toString());
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.findAndRegisterModules();
+        String jsonInput = "[{\"store\":\"100\",\"inventory\":\"25\",\"datetime\":\"2023-04-14T18:56:30Z\"},{\"store\":\"200\",\"inventory\":\"99\",\"datetime\":\"2020-05-21T07:37:11.000\"},{\"store\":\"300\",\"inventory\":\"250\",\"datetime\":\"2020-05-21T07:37:11.000\"}]";
 
+        List<LocationInventory> locObjects = mapper.readValue(jsonInput, new TypeReference<List<LocationInventory>>(){});
+
+        for (LocationInventory locinv : locObjects) {
+            System.out.println(locinv.toString());
+        }
+         */
 
         return itemMessage;
     }
 
 
     //Map the Domain objects to the Model objects to insert into MongoDB
-    public static Item itemMessagetoItemModel() {
+    public static Item itemMessagetoItemModel(ItemMessage itemMessage) {
         //public static Item itemMessagetoItemModel(ItemMessage itemMessage) {
 
         Item itemModel = new Item();
-        ItemMessage itemMessage = new ItemMessage();
+        //ItemMessage itemMessage = new ItemMessage();
 
-        //Map Item properties
+        //Map Item properties from Domain to Model object
         itemModel.setItem_id(itemMessage.getItem_id());
         itemModel.setBarcode(itemMessage.getBarcode());
         itemModel.setType(itemMessage.getType());
@@ -61,15 +80,14 @@ public class ItemMapper {
 
 
         Inventory inventoryModel = new Inventory();
+        ItemMessage itemMessage = new ItemMessage();
+        LocationInventory locationInventory = new LocationInventory();
 
-        //Map Inventory properties
-
-        //itemModel.setLocation(itemMessage.getLocation());
-        //Here i think i would need to map the LocationInventory domain to the new Inventory Model
-        //Need to create a new Inventory Model Object too.
-        //Map Inventory properties
-        //inventoryModel.setItem_id(itemMessage.getItem_id());
-        //inventoryModel.setInventory();
+        //Map Inventory properties from Domain to Model object
+        inventoryModel.setItem_id(itemMessage.getItem_id());
+        inventoryModel.setInventory(locationInventory.getInventory());
+        inventoryModel.setStore(locationInventory.getStore());
+        inventoryModel.setDatetime(locationInventory.getDatetime());
 
         //System.out.println(itemModel.toString());
         return inventoryModel;

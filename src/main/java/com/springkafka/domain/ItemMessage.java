@@ -1,8 +1,11 @@
 package com.springkafka.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /*
@@ -11,10 +14,12 @@ import java.util.Objects;
 
 
 //Sample JSON Message for Terminal window producer NEW
-{"item_id":1,"barcode":"A123456789","type":"movie","description":"The Arrival of a Train","country":"USA","location":
+{"item_id":1,"barcode":"A123456789","type":"movie","description":"The Arrival of a Train","country":"USA","location_inventory":
 [{"store":"100","inventory":"25","datetime":"2023-04-14T18:56:30Z"},{"store":"200","inventory":"99","datetime":"2023-04-14T18:56:30Z"},
 {"store":"300","inventory":"250","datetime":"2023-04-14T18:56:30Z"}]}
 
+Flattened for kafka producer
+{"item_id":1,"barcode":"A123456789","type":"movie","description":"The Arrival of a Train","country":"USA","location_inventory":[{"store":"100","inventory":"25","datetime":"2023-04-14T18:56:30Z"},{"store":"200","inventory":"99","datetime":"2023-04-14T18:56:30Z"},{"store":"300","inventory":"250","datetime":"2023-04-14T18:56:30Z"}]}
 
  */
 
@@ -41,8 +46,11 @@ public class ItemMessage {
     @JsonProperty("country")
     private String country;
 
-    @JsonProperty("location")
+    @JsonProperty("location_inventory")
     private List<LocationInventory> location;
+
+    //@JsonProperty("location_inventory")
+    //private Map<String, Object> location;
 
     public Long getItem_id() {
         return item_id;

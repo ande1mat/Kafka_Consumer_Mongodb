@@ -2,6 +2,7 @@ package com.springkafka.model;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.Objects;
 
@@ -11,7 +12,8 @@ public class Inventory {
     private long item_id;
     private String store;
     private Integer inventory;
-    private OffsetDateTime datetime;
+    //private OffsetDateTime datetime;
+    private LocalDateTime datetime;
 
     public long getItem_id() {
         return item_id;
@@ -37,14 +39,9 @@ public class Inventory {
         this.inventory = inventory;
     }
 
-    public OffsetDateTime getDatetime() {
-        return datetime;
-    }
+    public LocalDateTime getDatetime() {return datetime;}
 
-    public void setDatetime(OffsetDateTime datetime) {
-        this.datetime = datetime;
-    }
-
+    public void setDatetime(LocalDateTime datetime) {this.datetime = datetime;}
 
     @Override
     public boolean equals(Object o) {
