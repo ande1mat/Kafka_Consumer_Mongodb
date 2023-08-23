@@ -12,7 +12,6 @@ public class Inventory {
     private long item_id;
     private String store;
     private Integer inventory;
-    //private OffsetDateTime datetime;
     private LocalDateTime datetime;
 
     public long getItem_id() {

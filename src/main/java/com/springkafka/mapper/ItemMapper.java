@@ -13,12 +13,13 @@ import org.springframework.context.annotation.Bean;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 public class ItemMapper {
 
-    //Map the consumed Kafka message to Domain Objects
-    public static ItemMessage  itemtoItemMessage(ItemMessage item) throws IOException {
+    //Map the consumed Kafka message to Item Domain Objects
+    public static ItemMessage itemtoItemMessage(ItemMessage item) throws IOException {
 
         ItemMessage itemMessage = new ItemMessage();
         LocationInventory locationInventory = new LocationInventory();
@@ -32,27 +33,34 @@ public class ItemMapper {
         itemMessage.setVendor(item.getVendor());
         itemMessage.setCountry(item.getCountry());
 
-        //Map Location Inventory properties to Domain object
-        itemMessage.setLocation(item.getLocation());  //THIS WORKS AND ITEM MESSAGE LOCATION LIST IS POPULATED AND MAPPED
-        System.out.println(itemMessage.getLocation()); //LOCATION INFO JSON ARRAY IS POPULATED HERE!!
-        //locationInventory.setStore(itemMessage.getLocation());
-
-
-        /*lets create a List of the location info to manage later
-
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.findAndRegisterModules();
-        String jsonInput = "[{\"store\":\"100\",\"inventory\":\"25\",\"datetime\":\"2023-04-14T18:56:30Z\"},{\"store\":\"200\",\"inventory\":\"99\",\"datetime\":\"2020-05-21T07:37:11.000\"},{\"store\":\"300\",\"inventory\":\"250\",\"datetime\":\"2020-05-21T07:37:11.000\"}]";
-
-        List<LocationInventory> locObjects = mapper.readValue(jsonInput, new TypeReference<List<LocationInventory>>(){});
-
-        for (LocationInventory locinv : locObjects) {
-            System.out.println(locinv.toString());
-        }
-         */
-
         return itemMessage;
     }
+
+
+    //Map the consumed Kafka message to InventoryDomain Objects
+    public static List<LocationInventory>  itemtoInventoryMessage(ItemMessage item) throws IOException {
+
+        ItemMessage itemMessage = new ItemMessage();
+        //LocationInventory locationInventory = new LocationInventory();
+
+        //Map Location Inventory properties to Domain objects
+        itemMessage.setLocation(item.getLocation());  //THIS WORKS AND ITEM MESSAGE LOCATION LIST IS POPULATED AND MAPPED
+            //System.out.println(itemMessage.getLocation()); //LOCATION INFO JSON ARRAY IS POPULATED HERE!!
+        List<LocationInventory> locObjects = itemMessage.getLocation();
+        //locObjects.stream().forEach(elem -> System.out.println(elem));
+
+        // For loop for iterating over the List
+        for (int i = 0; i < locObjects.size(); i++) {
+
+            // Print all elements and feild values of List
+            System.out.println(i + "    " + locObjects.get(i).getStore());
+            System.out.println(i + "    " + locObjects.get(i).getInventory());
+            System.out.println(i + "    " + locObjects.get(i).getDatetime());
+        }
+
+        return locObjects;  //Return the List object of Inventory
+    }
+
 
 
     //Map the Domain objects to the Model objects to insert into MongoDB
@@ -76,8 +84,13 @@ public class ItemMapper {
     }
 
 
-    public static Inventory itemMessagetoInventoryModel() {
+    public static Inventory itemMessagetoInventoryModel(List<LocationInventory> inventoryList) {
 
+
+        //here we need to turn the Item Model into a List and populate it so we can save it to the database
+        //the item id will be the same for each List element passed in
+
+        List<LocationInventory> locModelObjects = inventoryList;
 
         Inventory inventoryModel = new Inventory();
         ItemMessage itemMessage = new ItemMessage();

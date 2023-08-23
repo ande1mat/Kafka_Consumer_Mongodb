@@ -10,6 +10,8 @@ import com.springkafka.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class ConsumerService {
     @Autowired
@@ -24,7 +26,6 @@ public class ConsumerService {
     public void saveItem (ItemMessage itemMessage) {
 
         Item itemModel = new Item();
-        Inventory inventoryModel = new Inventory();
 
         //Map the Item Message Domain object to the Item Model Object
         itemModel = ItemMapper.itemMessagetoItemModel(itemMessage);
@@ -32,12 +33,22 @@ public class ConsumerService {
         //Save the Item Model object to MongodDB
         customRepository.updateItem(itemModel);
 
-        //Map the Inventory Message Domain object to the Item Model Object
-        //inventoryModel = ItemMapper.itemMessagetoInventoryModel();
+    }
 
-        //customRepository.updateInventory(inventoryModel);
 
-        //return();
+    public void saveInventory (List<LocationInventory> inventoryList) {
+
+        /*
+        Inventory inventoryModel = new Inventory();
+
+        //Map the Inventory Message Domain object to the Inventory Model Object
+        inventoryModel = ItemMapper.itemMessagetoInventoryModel(inventoryList);
+
+        //Save the Invenotry Model object to MongodDB
+        customRepository.updateInventory(inventoryModel);
+*/
+
+
     }
 
 }

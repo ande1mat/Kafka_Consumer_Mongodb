@@ -20,7 +20,6 @@ public class LocationInventory {
 
     @JsonProperty("datetime")
     private LocalDateTime datetime;
-    //private OffsetDateTime datetime;
 
     public String getStore() {return store;}
 
