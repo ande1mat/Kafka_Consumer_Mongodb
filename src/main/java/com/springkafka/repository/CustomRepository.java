@@ -1,5 +1,6 @@
 package com.springkafka.repository;
 
+import com.springkafka.domain.ItemMessage;
 import com.springkafka.model.Inventory;
 import com.springkafka.model.Item;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,16 +46,21 @@ public class CustomRepository {
     {"store":"300","inventory":"250","datetime":"2023-04-14T18:56:30Z"}]}*/
 
     //This method will perform a Upsert (findAndModify), so it will insert if item_id is new, and update if it exists
-    public Inventory updateInventory(Inventory inventory){
-        Query query = new Query();
-        query.addCriteria(Criteria.where("item_id").is(inventory.getItem_id()));
-        Update update = new Update();
-        update.set("item_id", inventory.getItem_id());
-        update.set("store", inventory.getStore());
-        update.set("inventory", inventory.getInventory());
-        update.set("datetime", inventory.getDatetime());
-        return mongoTemplate.findAndModify(query, update, FindAndModifyOptions.options().upsert(true), Inventory.class);  //do the UPSERT True here
+    public List<Inventory> updateInventory(List<Inventory> inventory){
+
+        //Query query = new Query();
+        //query.addCriteria(Criteria.where("item_id").is(inventory.getItem_id()));
+        //Update update = new Update();
+        //update.set("item_id", inventory.getItem_id());
+        //update.set("store", inventory.getStore());
+        //update.set("inventory", inventory.getInventory());
+        //update.set("datetime", inventory.getDatetime());
+        //return mongoTemplate.findAndModify(query, update, FindAndModifyOptions.options().upsert(true), Inventory.class);  //do the UPSERT True here
+
+        return inventory;  //remove this later and return Location inventory above....
+
     }
+
 
     //Future could be used for a find operation
     /*public List findByItem_id(Long Item_id){

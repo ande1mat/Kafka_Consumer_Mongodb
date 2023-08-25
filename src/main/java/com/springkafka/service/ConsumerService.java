@@ -38,15 +38,15 @@ public class ConsumerService {
 
     public void saveInventory (List<LocationInventory> inventoryList) {
 
-        /*
-        Inventory inventoryModel = new Inventory();
+        //Map Location Inventory properties from Domain to Model
+        List<Inventory> inventoryModel = LocationInventory.getLocation();
 
         //Map the Inventory Message Domain object to the Inventory Model Object
         inventoryModel = ItemMapper.itemMessagetoInventoryModel(inventoryList);
 
         //Save the Invenotry Model object to MongodDB
         customRepository.updateInventory(inventoryModel);
-*/
+
 
 
     }

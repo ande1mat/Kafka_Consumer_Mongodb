@@ -9,18 +9,10 @@ import java.util.Objects;
 @Document(collection = "Inventory")
 public class Inventory {
 
-    private long item_id;
+    //private long item_id;
     private String store;
     private Integer inventory;
     private LocalDateTime datetime;
-
-    public long getItem_id() {
-        return item_id;
-    }
-
-    public void setItem_id(long item_id) {
-        this.item_id = item_id;
-    }
 
     public String getStore() {
         return store;
@@ -47,18 +39,17 @@ public class Inventory {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Inventory inventory1 = (Inventory) o;
-        return item_id == inventory1.item_id && Objects.equals(store, inventory1.store) && Objects.equals(inventory, inventory1.inventory) && Objects.equals(datetime, inventory1.datetime);
+        return Objects.equals(store, inventory1.store) && Objects.equals(inventory, inventory1.inventory) && Objects.equals(datetime, inventory1.datetime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(item_id, store, inventory, datetime);
+        return Objects.hash(store, inventory, datetime);
     }
 
     @Override
     public String toString() {
         return "Inventory{" +
-                "item_id=" + item_id +
                 ", store='" + store + '\'' +
                 ", inventory=" + inventory +
                 ", datetime=" + datetime +

@@ -39,20 +39,14 @@ public class ItemMapper {
 
     //Map the consumed Kafka message to InventoryDomain Objects
     public static List<LocationInventory>  itemtoInventoryMessage(ItemMessage item) throws IOException {
-
         ItemMessage itemMessage = new ItemMessage();
-        //LocationInventory locationInventory = new LocationInventory();
 
         //Map Location Inventory properties to Domain objects
-        itemMessage.setLocation(item.getLocation());  //THIS WORKS AND ITEM MESSAGE LOCATION LIST IS POPULATED AND MAPPED
-            //System.out.println(itemMessage.getLocation()); //LOCATION INFO JSON ARRAY IS POPULATED HERE!!
+        itemMessage.setLocation(item.getLocation());
         List<LocationInventory> locObjects = itemMessage.getLocation();
-        //locObjects.stream().forEach(elem -> System.out.println(elem));
 
-        // For loop for iterating over the List
+        // For loop for iterating over the Domain List
         for (int i = 0; i < locObjects.size(); i++) {
-
-            // Print all elements and feild values of List
             System.out.println(i + "    " + locObjects.get(i).getStore());
             System.out.println(i + "    " + locObjects.get(i).getInventory());
             System.out.println(i + "    " + locObjects.get(i).getDatetime());
@@ -65,10 +59,8 @@ public class ItemMapper {
 
     //Map the Domain objects to the Model objects to insert into MongoDB
     public static Item itemMessagetoItemModel(ItemMessage itemMessage) {
-        //public static Item itemMessagetoItemModel(ItemMessage itemMessage) {
 
         Item itemModel = new Item();
-        //ItemMessage itemMessage = new ItemMessage();
 
         //Map Item properties from Domain to Model object
         itemModel.setItem_id(itemMessage.getItem_id());
@@ -79,31 +71,34 @@ public class ItemMapper {
         itemModel.setVendor(itemMessage.getVendor());
         itemModel.setCountry(itemMessage.getCountry());
 
-        //System.out.println(itemModel.toString());
         return itemModel;
     }
 
 
-    public static Inventory itemMessagetoInventoryModel(List<LocationInventory> inventoryList) {
+    public static List<Inventory> itemMessagetoInventoryModel(List<LocationInventory> inventoryList) {
 
-
-        //here we need to turn the Item Model into a List and populate it so we can save it to the database
-        //the item id will be the same for each List element passed in
-
-        List<LocationInventory> locModelObjects = inventoryList;
-
-        Inventory inventoryModel = new Inventory();
+        LocationInventory LocationInv = new LocationInventory();
         ItemMessage itemMessage = new ItemMessage();
-        LocationInventory locationInventory = new LocationInventory();
+
+        //Map Location Inventory properties from Domain to Model
+        List<Inventory> locObjects = LocationInv.getLocation();
+
+
+        // For loop for iterating over the Model List
+        for (int i = 0; i < locObjects.size(); i++) {
+            System.out.println(i + "    " + locObjects.get(i).getStore());
+            System.out.println(i + "    " + locObjects.get(i).getInventory());
+            System.out.println(i + "    " + locObjects.get(i).getDatetime());
+        }
 
         //Map Inventory properties from Domain to Model object
-        inventoryModel.setItem_id(itemMessage.getItem_id());
-        inventoryModel.setInventory(locationInventory.getInventory());
-        inventoryModel.setStore(locationInventory.getStore());
-        inventoryModel.setDatetime(locationInventory.getDatetime());
+        //inventoryModel.setItem_id(itemMessage.getItem_id());
+        //inventoryModel.setInventory(inventoryList());
+        //inventoryModel.setStore(locationInventory.getStore());
+        //inventoryModel.setDatetime(locationInventory.getDatetime());
 
         //System.out.println(itemModel.toString());
-        return inventoryModel;
+        return locObjects;
     }
 
 }

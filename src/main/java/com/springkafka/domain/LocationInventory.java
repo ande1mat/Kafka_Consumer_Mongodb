@@ -2,9 +2,11 @@ package com.springkafka.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.springkafka.model.Inventory;
 
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -20,6 +22,17 @@ public class LocationInventory {
 
     @JsonProperty("datetime")
     private LocalDateTime datetime;
+
+    @JsonProperty("location_inventory")
+    private static List<Inventory> location;
+
+    public static List<Inventory> getLocation() {
+        return location;
+    }
+
+    public void setLocation(List<Inventory> location) {
+        this.location = location;
+    }
 
     public String getStore() {return store;}
 
