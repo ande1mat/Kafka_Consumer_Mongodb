@@ -2,17 +2,18 @@ package com.springkafka.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.springkafka.model.Inventory;
-
 import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
-import java.util.List;
 import java.util.Objects;
 
 
-//"location_inventory":[{"store":"100","inventory":"25","datetime":"2023-04-14T18:56:30Z"},{"store":"200","inventory":"99","datetime":"2023-04-14T18:56:30Z"},{"store":"300","inventory":"250","datetime":"2023-04-14T18:56:30Z"}]}
-
 public class LocationInventory {
+
+    public LocationInventory(Long item_id){
+        this.item_id = item_id;
+    }
+
+    @JsonProperty("item_id")
+    private Long item_id;
 
     @JsonProperty("store")
     private String store;
@@ -23,18 +24,17 @@ public class LocationInventory {
     @JsonProperty("datetime")
     private LocalDateTime datetime;
 
-    @JsonProperty("location_inventory")
-    private static List<Inventory> location;
-
-    public static List<Inventory> getLocation() {
-        return location;
+    public Long getItem_id() {
+        return item_id;
     }
 
-    public void setLocation(List<Inventory> location) {
-        this.location = location;
+    public void setItem_id(Long item_id) {
+        this.item_id = item_id;
     }
 
-    public String getStore() {return store;}
+    public String getStore() {
+        return store;
+    }
 
     public void setStore(String store) {
         this.store = store;
@@ -61,18 +61,19 @@ public class LocationInventory {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LocationInventory that = (LocationInventory) o;
-        return Objects.equals(store, that.store) && Objects.equals(inventory, that.inventory) && Objects.equals(datetime, that.datetime);
+        return Objects.equals(item_id, that.item_id) && Objects.equals(store, that.store) && Objects.equals(inventory, that.inventory) && Objects.equals(datetime, that.datetime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(store, inventory, datetime);
+        return Objects.hash(item_id, store, inventory, datetime);
     }
 
     @Override
     public String toString() {
         return "LocationInventory{" +
-                "store='" + store + '\'' +
+                "item_id=" + item_id +
+                ", store='" + store + '\'' +
                 ", inventory=" + inventory +
                 ", datetime=" + datetime +
                 '}';

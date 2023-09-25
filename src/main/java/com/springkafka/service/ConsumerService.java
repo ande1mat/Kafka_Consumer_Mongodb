@@ -9,14 +9,14 @@ import com.springkafka.repository.CustomRepository;
 import com.springkafka.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
+import java.util.*;
 
 @Component
 public class ConsumerService {
     @Autowired
     private ItemRepository itemRepository;
     private CustomRepository customRepository;
+    private int i;
 
     public ConsumerService(ItemRepository itemRepository, CustomRepository customRepository) {
         this.itemRepository = itemRepository;
@@ -38,17 +38,36 @@ public class ConsumerService {
 
     public void saveInventory (List<LocationInventory> inventoryList) {
 
-        //Map Location Inventory properties from Domain to Model
-        List<Inventory> inventoryModel = LocationInventory.getLocation();
+        //Initialize the model Arraylist to have the same size as Inventory list
+        ArrayList<Inventory> modelObjects = new ArrayList<>();
 
-        //Map the Inventory Message Domain object to the Inventory Model Object
-        inventoryModel = ItemMapper.itemMessagetoInventoryModel(inventoryList);
+        //Map Location Inventory properties from Domain to Model Inventory
+        /*for (i = 0; i < inventoryList.size(); i++) {
 
-        //Save the Invenotry Model object to MongodDB
-        customRepository.updateInventory(inventoryModel);
+            //---DATA EXISTS HERE FINE!  Print out the domain objects
+            //System.out.println(i + " domain object   " + inventoryList.get(i).getStore());
+            //System.out.println(i + " domain object   " + inventoryList.get(i).getInventory());
+            //System.out.println(i + " domain object   " + inventoryList.get(i).getDatetime());
 
+            //THIS WORKS!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            //modelObjects2.add(new Inventory("abc", 123, LocalDateTime.parse("2019-03-27T10:15:30")));
+            //THIS WORKS!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+            //THIS WORKS!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            //TODO GETTING INDEX OUT OF BOUNDS SOMEWHERE SO FIX THAT, MIGHT NEED TO SET ARRAY SIZE TO inventoryList.size() Or something
+            //Map the Domain Objects to the Model Objects
+            modelObjects.add(new Inventory(inventoryList.get(i).getStore(), inventoryList.get(i).getInventory(), (inventoryList.get(i).getDatetime())));
 
-    }
+            System.out.println(i + " model object   " + modelObjects.get(i).getStore());
+            System.out.println(i + " model object   " + modelObjects.get(i).getInventory());
+            System.out.println(i + " model object   " + modelObjects.get(i).getRecorddatetime());*/
+
+        //Map the Item Message Domain object to the Item Model Object
+        modelObjects = ItemMapper.itemtoInventoryModel(inventoryList);
+
+        //Save the Inventory Model object to MongodDB
+        customRepository.updateInventory(modelObjects);
+
+        }
 
 }

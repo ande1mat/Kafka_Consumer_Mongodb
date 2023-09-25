@@ -2,6 +2,7 @@ package com.springkafka.listener;
 
 import com.springkafka.domain.ItemMessage;
 import com.springkafka.mapper.ItemMapper;
+import com.springkafka.model.Item;
 import com.springkafka.service.ConsumerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
@@ -14,6 +15,8 @@ import org.springframework.stereotype.Service;
 @Component
 @PropertySource("classpath:application.properties")
 public class TopicListener {
+
+
     @Autowired
     private ConsumerService service;
 

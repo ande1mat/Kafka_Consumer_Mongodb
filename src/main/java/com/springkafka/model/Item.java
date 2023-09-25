@@ -1,6 +1,10 @@
 package com.springkafka.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.springkafka.domain.LocationInventory;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.List;
 import java.util.Objects;
 
 /*{"item_id":1, "barcode":"A123456789", "type":"testing", "description":"The Arrival of a Test","country":"TEST"}*/

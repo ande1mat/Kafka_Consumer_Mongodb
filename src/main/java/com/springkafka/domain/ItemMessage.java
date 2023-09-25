@@ -1,11 +1,7 @@
 package com.springkafka.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 /*
@@ -48,9 +44,6 @@ public class ItemMessage {
 
     @JsonProperty("location_inventory")
     private List<LocationInventory> location;
-
-    //@JsonProperty("location_inventory")
-    //private Map<String, Object> location;
 
     public Long getItem_id() {
         return item_id;
