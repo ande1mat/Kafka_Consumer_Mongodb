@@ -49,9 +49,9 @@ public class CustomRepository {
         for (int i = 0; i < locationInventories.size(); i++) {
 
             System.out.println("Saving Inventory for Item id --> "  +  locationInventories.get(i).getItem_id());
-            //System.out.println("Saving Inventory for " + i + "    " + locationInventories.get(i).getStore());
-            //System.out.println("Saving Inventory for " + i + "    " + locationInventories.get(i).getInventory());
-            //System.out.println("Saving Inventory for " + i + "    " + locationInventories.get(i).getRecorddatetime());
+            System.out.println("Saving Inventory for " + i + "    " + locationInventories.get(i).getStore());
+            System.out.println("Saving Inventory for " + i + "    " + locationInventories.get(i).getInventory());
+            System.out.println("Saving Inventory for " + i + "    " + locationInventories.get(i).getRecorddatetime());
 
             Query query = new Query();
             query.addCriteria(Criteria.where("item_id").is(locationInventories.get(i).getItem_id()));

@@ -21,6 +21,8 @@ public class KafkaErrorHandler implements CommonErrorHandler {
         manageException(thrownException, consumer);
     }
 
+
+    //Poison Pill Message handling https://stephantromer.dev/blog/how-to-handle-poison-pills-in-kafka
     private void manageException(Exception ex, Consumer<?, ?> consumer) {
         System.out.println("Error polling message: " + ex.getMessage());
         if (ex instanceof RecordDeserializationException) {

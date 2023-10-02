@@ -49,7 +49,7 @@ public class KafkaConfig {
         return new DefaultKafkaConsumerFactory<>(config,new StringDeserializer(),
                 new JsonDeserializer<>(ItemMessage.class));
     }
-
+    
     @Bean
     public ConcurrentKafkaListenerContainerFactory<String, ItemMessage> kafkaListener(){
         ConcurrentKafkaListenerContainerFactory factory = new ConcurrentKafkaListenerContainerFactory();

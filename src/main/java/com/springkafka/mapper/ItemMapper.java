@@ -83,12 +83,12 @@ public class ItemMapper {
         for (int i = 0; i < locObjects.size(); i++) {
 
             //LETS ADD IN THE ITEM ID to the LOCATION DOMAIN OBJECT SO WE CAN USE IT LATER
-            locObjects.add(i, new LocationInventory(item.getItem_id()));
+            locObjects.set(i, new LocationInventory(item.getItem_id()));
             
-            System.out.println(i + " location item Id   " + locObjects.get(i).getItem_id());
-            System.out.println(i + " location store     " + locObjects.get(i).getStore());
-            System.out.println(i + " location inventory " + locObjects.get(i).getInventory());
-            System.out.println(i + " datetime           " + locObjects.get(i).getDatetime());
+            System.out.println(i + " Domain location item Id   " + locObjects.get(i).getItem_id());
+            System.out.println(i + " Domain location store     " + locObjects.get(i).getStore());
+            System.out.println(i + " Domain location inventory " + locObjects.get(i).getInventory());
+            System.out.println(i + " Domain datetime           " + locObjects.get(i).getDatetime());
         }
 
         return locObjects;  //Return the List object of Inventory

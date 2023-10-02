@@ -5,15 +5,6 @@ import java.util.List;
 import java.util.Objects;
 
 /*
-//Sample JSON Message for Terminal window producer OLD
-{"item_id":1, "barcode":"A123456789", "type":"movie", "description":"The Arrival of a Train", "country":"USA"}
-
-
-//Sample JSON Message for Terminal window producer NEW
-{"item_id":1,"barcode":"A123456789","type":"movie","description":"The Arrival of a Train","country":"USA","location_inventory":
-[{"store":"100","inventory":"25","datetime":"2023-04-14T18:56:30Z"},{"store":"200","inventory":"99","datetime":"2023-04-14T18:56:30Z"},
-{"store":"300","inventory":"250","datetime":"2023-04-14T18:56:30Z"}]}
-
 Flattened for kafka producer
 {"item_id":1,"barcode":"A123456789","type":"movie","description":"The Arrival of a Train","country":"USA","location_inventory":[{"store":"100","inventory":"25","datetime":"2023-04-14T18:56:30Z"},{"store":"200","inventory":"99","datetime":"2023-04-14T18:56:30Z"},{"store":"300","inventory":"250","datetime":"2023-04-14T18:56:30Z"}]}
 

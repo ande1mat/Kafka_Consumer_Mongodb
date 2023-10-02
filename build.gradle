@@ -22,8 +22,6 @@ dependencies {
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version:'2.6.0'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter'
-    //implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
-    //implementation 'com.fasterxml.jackson.datatype.jsr310.JavaTimeModule'
 
     //MongoDB
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
