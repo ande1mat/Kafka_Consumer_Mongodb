@@ -1,9 +1,11 @@
 package com.springkafka.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.springkafka.domain.LocationInventory;
 import org.springframework.data.mongodb.core.mapping.Document;
-import java.util.Objects;
 
-/*{"item_id":1, "barcode":"A123456789", "type":"testing", "description":"The Arrival of a Test","country":"TEST"}*/
+import java.util.List;
+import java.util.Objects;
 
 @Document(collection = "Item")
 public class Item {
@@ -12,6 +14,8 @@ public class Item {
     private String barcode;
     private String type;
     private String description;
+    private String style;
+    private String vendor;
     private String country;
 
     public long getItem_id() {
@@ -46,6 +50,22 @@ public class Item {
         this.description = description;
     }
 
+    public String getStyle() {
+        return style;
+    }
+
+    public void setStyle(String style) {
+        this.style = style;
+    }
+
+    public String getVendor() {
+        return vendor;
+    }
+
+    public void setVendor(String vendor) {
+        this.vendor = vendor;
+    }
+
     public String getCountry() {
         return country;
     }
@@ -59,12 +79,12 @@ public class Item {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Item item = (Item) o;
-        return item_id == item.item_id && Objects.equals(barcode, item.barcode) && Objects.equals(type, item.type) && Objects.equals(description, item.description) && Objects.equals(country, item.country);
+        return item_id == item.item_id && Objects.equals(barcode, item.barcode) && Objects.equals(type, item.type) && Objects.equals(description, item.description) && Objects.equals(style, item.style) && Objects.equals(vendor, item.vendor) && Objects.equals(country, item.country);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(item_id, barcode, type, description, country);
+        return Objects.hash(item_id, barcode, type, description, style, vendor, country);
     }
 
     @Override
@@ -74,6 +94,8 @@ public class Item {
                 ", barcode='" + barcode + '\'' +
                 ", type='" + type + '\'' +
                 ", description='" + description + '\'' +
+                ", style='" + style + '\'' +
+                ", vendor='" + vendor + '\'' +
                 ", country='" + country + '\'' +
                 '}';
     }

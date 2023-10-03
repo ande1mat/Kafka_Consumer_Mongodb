@@ -28,18 +28,21 @@ public class TopicListener {
             containerFactory = "kafkaListener"
     )
     public void listen(ItemMessage item, Acknowledgment acknowledgment){
-
         try {
             System.out.println("Consumed Message :"+item);
-            //Map the ItemMessage to Domain object and Save to MongoDB
-            service.saveItem(ItemMapper.itemtoItemMessage(item));
-            System.out.println ("Saved the Item to MongoDB");
+            //Map the ItemMessage to Item Domain adn Model objects then Save to MongoDB
+            service.saveItem(ItemMapper.itemtoItemMessage(item));  //This mapper method returns the itemMessage object to SAVE to MONGODB
+
+            //Map the ItemMessage to Location Domain and Model objects then Save to MongoDB
+            service.saveInventory(ItemMapper.itemtoInventoryMessage(item));  //This mapper method returns the itemMessage object to SAVE to MONGODB
+
+            System.out.println ("Saved the Item and Inventory to MongoDB");
         } catch (Exception e) {
             System.out.println("Message consumption failed for message {}"+item);
+            System.out.println(e);
             //Do something else
         } finally {
             acknowledgment.acknowledge();
         }
-
     }
 }

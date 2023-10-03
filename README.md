@@ -13,6 +13,7 @@ These steps enable you to run the app locally within your IDE.
 * Step 1:
     * Setup a local or hosted Mongodb Server
     * Use the MongoDB configurations in the Application Properties for database name etc.
+    * --> startup mongodb locally reference--> sudo mongod --dbpath ~/mongodb_data
     * Ensure you have Kafka locally, or point to hosted Kafka Zookeeper and Brokers that can host a kafka topic
     
 * Step 2:
