@@ -51,8 +51,7 @@ public class ItemMapper {
             //modelObjects2.add(new Inventory("abc", 123, LocalDateTime.parse("2019-03-27T10:15:30")));
             //THIS WORKS!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-            //THIS WORKS!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            //TODO GETTING INDEX OUT OF BOUNDS SOMEWHERE SO FIX THAT, MIGHT NEED TO SET ARRAY SIZE TO inventoryList.size() Or something
+
             //Map the Domain Objects to the Model Objects
             modelObjects.add(new Inventory(inventoryList.get(i).getItem_id(),
                     inventoryList.get(i).getStore(),
