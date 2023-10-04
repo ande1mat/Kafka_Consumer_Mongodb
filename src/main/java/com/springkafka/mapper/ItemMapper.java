@@ -6,7 +6,8 @@ import com.springkafka.domain.LocationInventory;
 import com.springkafka.model.Inventory;
 import com.springkafka.model.Item;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ItemMapper {
@@ -28,8 +29,8 @@ public class ItemMapper {
         return itemMessage;
     }
 
-    //Map the consumed Kafka message to InventoryDomain Objects
-    public static ArrayList<Inventory> itemtoInventoryModel(List<LocationInventory> inventoryList) {
+    //Map the consumed Kafka message to Inventory MODEL Objects
+    public static ArrayList<Inventory> itemtoInventoryModel(List<LocationInventory> inventoryList, Long itemId) {
 
         //Initialize the model Arraylist to have the same size as Inventory list
         ArrayList<Inventory> modelObjects = new ArrayList<>();
@@ -55,7 +56,7 @@ public class ItemMapper {
             //THIS WORKS!!!!!!!!!!!!!!!!!!!!!!!!!!!
             //TODO GETTING INDEX OUT OF BOUNDS SOMEWHERE SO FIX THAT, MIGHT NEED TO SET ARRAY SIZE TO inventoryList.size() Or something
             //Map the Domain Objects to the Model Objects
-            modelObjects.add(new Inventory(inventoryList.get(i).getItem_id(),
+            modelObjects.add(new Inventory(itemId,
                     inventoryList.get(i).getStore(),
                     inventoryList.get(i).getInventory(),
                     (inventoryList.get(i).getDatetime())));
@@ -71,7 +72,7 @@ public class ItemMapper {
 
     }
 
-    //Map the consumed Kafka message to InventoryDomain Objects
+    //Map the consumed Kafka message to Inventory DOMAIN Objects
     public static List<LocationInventory>  itemtoInventoryMessage(ItemMessage item) throws IOException {
         ItemMessage itemMessage = new ItemMessage();
 
@@ -81,17 +82,25 @@ public class ItemMapper {
 
         // For loop for iterating over the Domain List
         for (int i = 0; i < locObjects.size(); i++) {
-
-            //LETS ADD IN THE ITEM ID to the LOCATION DOMAIN OBJECT SO WE CAN USE IT LATER
-            locObjects.set(i, new LocationInventory(item.getItem_id()));
             
-            System.out.println(i + " Domain location item Id   " + locObjects.get(i).getItem_id());
+            //System.out.println(i + " Domain location item Id   " + locObjects.get(i).getItem_id());
             System.out.println(i + " Domain location store     " + locObjects.get(i).getStore());
             System.out.println(i + " Domain location inventory " + locObjects.get(i).getInventory());
             System.out.println(i + " Domain datetime           " + locObjects.get(i).getDatetime());
         }
 
         return locObjects;  //Return the List object of Inventory
+    }
+
+
+    //Get the Item Id to map to the Model Object later
+    public static Long getItemIdMessage(ItemMessage item) throws IOException {
+        ItemMessage itemMessage = new ItemMessage();
+
+        //Map Location Inventory properties to Domain objects
+        Long itemMessageID = (item.getItem_id());
+
+        return itemMessageID;
     }
 
 
@@ -111,36 +120,5 @@ public class ItemMapper {
 
         return itemModel;
     }
-
-
-
-
-    /*public static List<Inventory> itemMessagetoInventoryModel(List<LocationInventory> inventoryList) {
-
-
-
-
-        //List<Inventory> locObjects = LocationInventory.getModellocation();
-
-        //List<Inventory> locObjects = new ArrayList<Inventory>();
-        //List<LocationInventory> locObjects2 = new ArrayList<LocationInventory>();
-
-        //Map Location Inventory properties from Domain to Model
-        //List<Inventory> locObjects = LocationInventory.getModellocation();
-        //HERE WE WANT TO TRY AND SET OR COPY the List<LocationInventory> to a List<Inventory>
-        //AND RETURN IT BELOW.......
-
-        //How to Map one list to another.
-        //Collections.copy(locObjects, inventoryList);
-
-        // For loop for iterating over the Model List
-        /*for (int i = 0; i < locObjects.size(); i++) {
-            System.out.println(i + "    " + locObjects.get(i).getStore());
-            System.out.println(i + "    " + locObjects.get(i).getInventory());
-            System.out.println(i + "    " + locObjects.get(i).getDatetime());
-        }
-
-        return locObjects;
-    }*/
 
 }

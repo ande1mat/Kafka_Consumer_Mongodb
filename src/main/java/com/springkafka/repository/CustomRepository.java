@@ -1,16 +1,15 @@
 package com.springkafka.repository;
 
-import com.springkafka.domain.ItemMessage;
-import com.springkafka.domain.LocationInventory;
 import com.springkafka.model.Inventory;
 import com.springkafka.model.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
 @Repository
@@ -55,6 +54,7 @@ public class CustomRepository {
 
             Query query = new Query();
             query.addCriteria(Criteria.where("item_id").is(locationInventories.get(i).getItem_id()));
+            query.addCriteria(Criteria.where("store").is(locationInventories.get(i).getStore()));
             Update update = new Update();
             update.set("item_id", locationInventories.get(i).getItem_id());
             update.set("store", locationInventories.get(i).getStore());
@@ -62,8 +62,6 @@ public class CustomRepository {
             update.set("datetime", locationInventories.get(i).getRecorddatetime());
             mongoTemplate.findAndModify(query, update, FindAndModifyOptions.options().upsert(true), Inventory.class);  //do the UPSERT True here
         }
-        //return locationInventories;  //remove this later and return Location inventory above....
-
     }
 
 

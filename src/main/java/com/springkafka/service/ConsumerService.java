@@ -36,7 +36,7 @@ public class ConsumerService {
     }
 
 
-    public void saveInventory (List<LocationInventory> inventoryList) {
+    public void saveInventory (List<LocationInventory> inventoryList, Long itemId) {
 
         //Initialize the model Arraylist to have the same size as Inventory list
         ArrayList<Inventory> modelObjects = new ArrayList<>();
@@ -63,7 +63,7 @@ public class ConsumerService {
             System.out.println(i + " model object   " + modelObjects.get(i).getRecorddatetime());*/
 
         //Map the Item Message Domain object to the Item Model Object
-        modelObjects = ItemMapper.itemtoInventoryModel(inventoryList);
+        modelObjects = ItemMapper.itemtoInventoryModel(inventoryList, itemId);
 
         //Save the Inventory Model object to MongodDB
         customRepository.updateInventory(modelObjects);

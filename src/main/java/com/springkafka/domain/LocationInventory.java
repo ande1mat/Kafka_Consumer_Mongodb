@@ -8,13 +8,6 @@ import java.util.Objects;
 
 public class LocationInventory {
 
-    public LocationInventory(Long item_id){
-        this.item_id = item_id;
-    }
-
-    @JsonProperty("item_id")
-    private Long item_id;
-
     @JsonProperty("store")
     private String store;
 
@@ -23,14 +16,6 @@ public class LocationInventory {
 
     @JsonProperty("datetime")
     private LocalDateTime datetime;
-
-    public Long getItem_id() {
-        return item_id;
-    }
-
-    public void setItem_id(Long item_id) {
-        this.item_id = item_id;
-    }
 
     public String getStore() {
         return store;
@@ -61,18 +46,17 @@ public class LocationInventory {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LocationInventory that = (LocationInventory) o;
-        return Objects.equals(item_id, that.item_id) && Objects.equals(store, that.store) && Objects.equals(inventory, that.inventory) && Objects.equals(datetime, that.datetime);
+        return Objects.equals(store, that.store) && Objects.equals(inventory, that.inventory) && Objects.equals(datetime, that.datetime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(item_id, store, inventory, datetime);
+        return Objects.hash(store, inventory, datetime);
     }
 
     @Override
     public String toString() {
         return "LocationInventory{" +
-                "item_id=" + item_id +
                 ", store='" + store + '\'' +
                 ", inventory=" + inventory +
                 ", datetime=" + datetime +

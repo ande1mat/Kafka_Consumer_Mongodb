@@ -36,7 +36,7 @@ public class TopicListener {
             service.saveItem(ItemMapper.itemtoItemMessage(item));  //This mapper method returns the itemMessage object to SAVE to MONGODB
 
             //Map the ItemMessage to Location Domain and Model objects then Save to MongoDB
-            service.saveInventory(ItemMapper.itemtoInventoryMessage(item));  //This mapper method returns the itemMessage object to SAVE to MONGODB
+            service.saveInventory(ItemMapper.itemtoInventoryMessage(item), ItemMapper.getItemIdMessage(item));  //This mapper method returns the itemMessage object to SAVE to MONGODB
 
             System.out.println ("Saved the Item and Inventory to MongoDB");
         } catch (Exception e) {

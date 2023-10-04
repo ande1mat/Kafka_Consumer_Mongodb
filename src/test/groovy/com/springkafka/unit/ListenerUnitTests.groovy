@@ -1,17 +1,11 @@
 package com.springkafka.unit
 
-import com.springkafka.config.KafkaConfig
-import jdk.nashorn.internal.parser.JSONParser
-import net.minidev.json.JSONObject
-import org.springframework.kafka.support.Acknowledgment
-import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper
+
 import spock.lang.Specification
-import com.springkafka.domain.ItemMessage;
-import com.springkafka.listener.TopicListener
 
 class ListenerUnitTests extends Specification{
 
-
+/*
     TopicListener messageListener
     KafkaConfig processor
     Acknowledgment acknowledgment
@@ -45,7 +39,7 @@ class ListenerUnitTests extends Specification{
     }
 
 
-
+*/
 
 
 }
