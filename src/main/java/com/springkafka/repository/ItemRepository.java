@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface ItemRepository extends MongoRepository<Item, Long > {
 
     @Query("{id :?1}")                          //SQL Equivalent : SELECT * FROM ITEM WHERE Item_ID=1
-    Optional<Item> findBookItemId(Long id);
+    Optional<Item> FindByItemId(Long id);
 
 
 }
