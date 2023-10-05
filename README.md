@@ -13,6 +13,7 @@ These steps enable you to run the app locally within your IDE.
 * Step 1:
     * Setup a local or hosted Mongodb Server
     * Use the MongoDB configurations in the Application Properties for database name etc.
+    * # start Mongo DB locally // sudo mongod --dbpath ~/mongodb
     * Ensure you have Kafka locally, or point to hosted Kafka Zookeeper and Brokers that can host a kafka topic
     
 * Step 2:
@@ -33,13 +34,19 @@ These steps enable you to run the app locally within your IDE.
     * Created a basic Kafka Consumer SpringBoot application that listens and consumes an Item event message and then inserts/updates a MongoDB document.
     * Enabled Application Health Check
     * Enabled Handling for bad Kafka messages
-    
+
+## MVP2 Features
+
+    * Created a new Mongo Collection for Inventory array messages in the Kafka event for the item at each store location
+        * New JSON event: {"item_id":1,"barcode":"A123456789","type":"movie","description":"The Arrival of a Train","country":"USA","location_inventory":[{"store":"100","inventory":"25","datetime":"2023-04-14T18:56:30Z"},{"store":"200","inventory":"99","datetime":"2023-04-14T18:56:30Z"},{"store":"300","inventory":"250","datetime":"2023-04-14T18:56:30Z"}]}
+    * Enabled DeadLetter processing
+    * Do something with Abstraction + Inheritance, promoting code reuse of the abstracted classes
+
 
 ## Future ToDos
-    * Add a Inventory Event Type to the Kafka message and consume both Item and Inventory event messages.  Insert/update a new MongoDB document for Item Inventory
-    * Add Unit Tests for Item Inventory Events
-    * Do something interesting with the Item Inventory event message and learn about (java arrayslist, hashmap, trees, graphs, etc.). E.g. I could perform rounding up or down on the Qty of pounds.  Put all that data into a Array/List and then loop through and update my Domain/Model data before Insert into DB.  I could add a UOM attribute on the Item detail, and if in Pounds only then do the rounding on the Kafka data before I insert into the DB.
-    * Do something with Abstraction + Inheritance, promoting code reuse of the abstracted classes
+    * Add Unit Tests with Embedded Kafka
+    * Create a Phython or Shell Script to replay Deadletter messages
+    * 
     
    
 
