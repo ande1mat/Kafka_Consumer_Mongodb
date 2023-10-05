@@ -33,16 +33,20 @@ public class TopicListener {
         try {
             System.out.println("Consumed Message :"+item);
             //Map the ItemMessage to Item Domain adn Model objects then Save to MongoDB
-            service.saveItem(ItemMapper.itemtoItemMessage(item));  //This mapper method returns the itemMessage object to SAVE to MONGODB
+            service.saveItem(ItemMapper.itemtoItemMessage(item));
 
             //Map the ItemMessage to Location Domain and Model objects then Save to MongoDB
-            service.saveInventory(ItemMapper.itemtoInventoryMessage(item), ItemMapper.getItemIdMessage(item));  //This mapper method returns the itemMessage object to SAVE to MONGODB
+            service.saveInventory(ItemMapper.itemtoInventoryMessage(item), ItemMapper.getItemIdMessage(item));
 
             System.out.println ("Saved the Item and Inventory to MongoDB");
         } catch (Exception e) {
             System.out.println("Message consumption failed for message {}"+item);
             System.out.println(e);
-            //Do something else
+
+            //Write the to the dead letter table collection in MongoDB if we can consume but hand some other error with the message processing
+            service.saveDeadLetter(item.toString(), "Error processing consumed Message - " + e.toString());
+
+
         } finally {
             acknowledgment.acknowledge();
         }
