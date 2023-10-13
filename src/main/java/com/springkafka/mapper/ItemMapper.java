@@ -47,7 +47,7 @@ public class ItemMapper {
         for (i = 0; i < inventoryList.size(); i++) {
             //Map the Domain Objects to the Model Objects
 
-            if (itemType == "movie")
+            if (itemType.equals("movie"))
             modelObjects.add(new Inventory(itemId,
                     inventoryList.get(i).getStore(),
                     movie.roundinventory(inventoryList.get(i).getInventory()),  //Round the Inventory for Item types of Movie
